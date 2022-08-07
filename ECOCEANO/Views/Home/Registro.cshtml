@@ -1,0 +1,91 @@
+﻿@model Usuarios
+@{
+    ViewData["Title"] = "Registrar";
+}
+
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="section-title">
+    <h3>Registro</h3>
+
+</div>
+<form id="frmRegistro" class="needs-validation" novalidate asp-controller="Usuario" asp-action="Add">
+    <div class="row">
+        <div class="col">
+            <label for="iNombre">Nombre:</label>
+            <input type="text" class="form-control" placeholder="Nombres(s)" id="iNombre" asp-for="nombre" required>
+        </div>
+        <div class="col">
+            <label for="iApellido">Primer Apellido:</label>
+            <input type="text" class="form-control" placeholder="Apellido Paterno" id="iApellido" asp-for="pApellido" required>
+        </div>
+        <div class="col">
+            <label for="iApellidoM">Segundo Apellido:</label>
+            <input type="text" class="form-control" placeholder="Apellido Materno" id="iApellidoM" asp-for="sApellido" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="Correo Electronico">Correo electronico</label>
+            <input type="text" class="form-control" placeholder="Correo Electronico" id="Correo Elecronico" asp-for="correo" required>
+            <div class="invalid-feedback">
+                Campo obligatorio.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label for="password">Contraseña:</label>
+            <input type="text" class="form-control" placeholder="Contraseña" id="password" asp-for="password" required>
+            <div class="invalid-feedback">
+                Campo obligatorio.
+            </div>
+        </div>
+
+        <div class="col">
+            <label for="ipassword2">Repite contraseña:</label>
+            <input type="text" class="form-control" placeholder="Escribe de nuevo" id="ipassword2" required>
+            <div class="invalid-feedback">
+                Campo obligatorio.
+            </div>
+        </div>
+
+    </div>
+    <br />
+    <div class="text-lg-center">
+        <button type="submit" class="btn btn-primary"> Registrar</button>
+        <a href="/Home/Registro" class="btn btn-danger"> Cancelar </a>
+    </div>
+</form>
+
+<!--SCRIPT PARA VALIDACIONES-->
+<script>
+    // SCRIPT PARA DESHABILITAR EL BOTON ENTRAR, SI HAY CAMPOS INVALIDOS
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault(); //PREVIENE EL EVENTO CLIC EN EL SUBMIT
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

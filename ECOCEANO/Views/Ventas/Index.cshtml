@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Ventas>
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Ventas";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Catalogos" asp-action="Index">Catalogos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Ventas</li>
+    </ol>
+</nav>
+<section id="nuevaVenta" class="mb-2">
+    <a id="btnNuevo" class="btn btn-success" asp-controller="Ventas" asp-action="Registro">
+        <i class=" fa fa-file"></i> Nuevo
+    </a>
+</section>
+<!---Listar las editoriales existentes en la BD-->
+<section id="ListaProductos">
+    <table class="table table-striped table-borderless">
+        <thead class=" thead-light">
+            <tr>
+
+                <th scope="col">@Html.DisplayNameFor(model => model.Articulos)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.MontoTotal)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Producto)</th>
+               
+                <th scope="col">Estatus</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Ventas in Model)
+            {
+            <tr>
+                <th scope="row">@Html.DisplayFor(model => Ventas.Articulos)</th>
+                <td>@Html.DisplayFor(model => Ventas.MontoTotal)</td>
+
+                <td>@Html.DisplayFor(model => Ventas.Producto.nombre)</td>
+                <td>@Html.DisplayFor(model => Ventas.estatus)</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Editar" asp-route-id="@Ventas.ID">
+                        <i class="fas fa-edit"></i>Editar
+                    </a>
+                    <a class="btn btn-danger" asp-action="Borrar" asp-route-id="@Ventas.ID">
+                        <i class="fas fa-trash"></i>Eliminar
+                    </a>
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>

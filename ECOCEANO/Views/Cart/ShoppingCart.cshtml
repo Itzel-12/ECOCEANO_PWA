@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Carrito";
+}
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<h1></h1>
+<div class="container">
+    <div class="row">
+        @if (ViewBag.cart != null)
+        {
+
+            <div class="col-md-9">
+                <table id="cart" class="table">
+                    <thead>
+                        <tr>
+                            <th style="width:50%">Producto</th>
+                            <th style="width:10%">Precio</th>
+                            <th style="width:8%">Cantidad</th>
+                            <th style="width:22%">Subtotal</th>
+                            <th style="width:10%">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.cart)
+                        {
+                            <tr>
+                                <td data-th="Producto">
+                                    <div class="row">
+                                        <div class="col-sm-4 hidden-xs">
+                                            <img src="~/Img/@item.Producto.Imagen" width="100" class="img-responsive" />
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <h4 class="nomargin">@item.Producto.nombre</h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Precio">
+                                    $@item.Producto.Precio MXN
+                                </td>
+                                <td data-th="Cantidad">
+                                    <input type="number" id="quantity" name="quantity" class="form-control text-center cantidad" value="@item.Quantity" />
+                                </td>
+                                <td data-th="Subtotal">
+                                    $@(item.Producto.Precio * item.Quantity) MXN
+                                </td>
+                                <td>
+                                    <button asp-action="Update" class="btn btn-info btn-sm update-cart" data-id="@item.Producto.ID"><i class="fas fa-sync-alt"></i></button>
+                                    <a asp-action="Remove" class="btn btn-danger btn-sm" asp-route-id="@item.Producto.ID"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr class="visible-xs">
+                            <td class="text-center">
+                                <strong>Total $@ViewBag.total MXN</strong>
+
+                            </td>
+
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+            <div class="col-md-3 justify-content-center">
+                <div class="card mb-4 box-shadow" style="position: sticky!important; top:0">
+                    <div class="card-body">
+                        <h5>Cantidad: @ViewBag.cantidad producto</h5>
+                        <h5>Total: $@ViewBag.total MXN</h5>
+                        <br />
+                        <div class="text-center">
+                            <a class="btn btn-info" asp-controller="Payment" asp-action="CreatePayment"><i class="fab fa-paypal"></i> Pagar con Paypal</a>
+                            <a class="btn btn-warning" asp-controller="Cart" asp-action="Index"><i class="fa fa-angle-left"></i> Continuar comprando</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-10">
+                <h3>Upps aun no hay articulos en el carrito.</h3>
+                <br />
+                <a asp-action="Index" class="btn btn-warning"><i class="fa fa-angle-left"></i>Ir al catálogo</a>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".update-cart").click(function (e) {
+            e.preventDefault();
+            var c = $(this);
+            $.ajax({
+                type: 'POST',
+                url: 'https://localhost:44378/Cart/Update',
+                data: {
+                    id: c.attr("data-id"),
+                    quantity: c.parents("tr").find(".cantidad").val()
+                },
+                success: function (response) {
+                    window.location.reload();
+                },
+                error: function (response) {
+                    console.log("Error al actualizar cantidad.");
+                }
+            });
+        });
+    });
+</script>

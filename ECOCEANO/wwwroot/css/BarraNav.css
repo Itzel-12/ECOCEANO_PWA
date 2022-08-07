@@ -1,0 +1,89 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+.menu3 li:after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 1px;
+    display: block;
+    transition: all 0.3s ease;
+    bottom: 25%;
+}
+
+.menu3 {
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*list-style: none;*/
+    /*padding: 0 100px;*/
+}
+.menu3 li{
+    display: block;
+    /*height: 100%;*/
+    /*margin-right: 30px;*/
+    /*font-size: 16px;*/
+    position: relative;
+    display: flex;
+    /*align-items: center;*/
+    color: #fff;
+    /*text-transform: uppercase;*/
+    /*text-shadow: 0 0 15px #8e54e9;*/
+    /*transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);*/
+}
+    .menu3 li a{
+        text-decoration: none;
+        color:white;
+    }
+
+    .menu3 li:hover::after {
+        width: 100%;
+        height: 1px;
+        background-color: #52B0FF;
+    }
+
+p {
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+header {
+    background: rgba(0,0,0,0.9)!important;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+}
+
+nav {
+    float: left; /* Desplazamos el nav hacia la izquierda */
+
+}
+
+    nav ul {
+        list-style: none;
+        overflow: hidden; /* Limpiamos errores de float */
+    }
+
+        nav ul li {
+            float: left;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+            nav ul li a {
+                display: block; /* Convertimos los elementos a en elementos bloque para manipular el padding */
+                padding: 20px;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            nav ul li:hover {
+                background-color: transparent;
+            }

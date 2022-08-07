@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ECOCEANO.Models.Productos>
+
+@{
+    ViewData["Title"] = "Catálogo";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="section-title">
+    <h3>Catálogo</h3>
+
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card m-md-4 box-shadow">
+                    <img class="card-img-top" src="~/Img/@Html.DisplayFor(modelItem =>
+                        item.Imagen)" style="height:225px; width:100%; display:block;" />
+                    <div class="card-body text-lg-center">
+                        <h4>@Html.DisplayFor(modelItem => item.nombre)</h4>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.descripcion)</p>
+                        <p><strong>Precio $@Html.DisplayFor(modelItem => item.Precio)MXN</strong></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="col-sm-12 d-flex justify-content-center">
+
+                                <a asp-action="AddToCart" asp-route-id="@item.ID"
+                                   type="submit" class="btn btn-primary align-items-center"> Agregar al carrito</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

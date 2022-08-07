@@ -1,0 +1,95 @@
+﻿@model Usuarios
+@{
+    ViewData["Title"] = "Inicio Sesion";
+}
+
+
+
+
+
+
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="section-title">
+    <h3>Iniciar Sesión</h3>
+
+</div>
+<!----Inicio de alerta-->
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>ERROR:</strong> @Html.ValidationMessage("ErrorLogin")
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<!----Fin de Alerta-->
+<div class="abs-center">
+    <form class="needs-validation justify-content-md-center" method="post" asp-controller="Login" asp-action="Login" novalidate>
+        <div class="row justify-content-md-center">
+            <div class="form-group col-md-6">
+                <label for="usuario">Correo Electrónico</label>
+                <input type="email" class="form-control" id="usuario" asp-for="correo" aria-describedby="emailHelp" required>
+                <small id="emailHelp" class="form-text text-muted">Nunca debes compartir información confidencial de acceso.</small>
+                <div class="valid-feedback">
+                    Correo electronico con formato valido.
+                </div>
+                <div class="invalid-feedback">
+                    Debe proporcionar un correo electronico valido.
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="form-group col-md-6">
+                <label for="contrasenia">Contraseña</label>
+                <input type="password" class="form-control" id="contrasenia" asp-for="password" required>
+                <div class="invalid-feedback">
+                    La contraseña es obligatoria.
+                </div>
+            </div>
+        </div>
+        <div class="text-lg-center">
+            <button type="submit" class="btn btn-primary">Entrar </button>
+            <a href="/Home/Registro" class="btn btn-success">Registrarse</a>
+        </div>
+        @Html.AntiForgeryToken()
+
+    </form>
+</div>
+
+<!--SCRIPT PARA VALIDACIONES-->
+<script>
+    // SCRIPT PARA DESHABILITAR EL BOTON ENTRAR, SI HAY CAMPOS INVALIDOS
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault(); //PREVIENE EL EVENTO CLIC EN EL SUBMIT
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+    //Script para cerrar las alertas
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+</script>

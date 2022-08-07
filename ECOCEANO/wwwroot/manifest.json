@@ -1,0 +1,17 @@
+{
+  "name": "ECOCEANO PWA",
+  "short_name": "EPWA",
+  "description": "ECOCEANO versión Aplicación Web Progresiva",
+  "icons": [
+    {
+      "src": "/Img/Logo (1).png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/Img/Logo (1).png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/"
+}

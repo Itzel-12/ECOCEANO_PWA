@@ -1,0 +1,28 @@
+﻿@model DetallesVentas
+@{
+    ViewData["Title"] = "Borrar";
+}
+<h3 class=" text-danger">¿Estas seguro de eliminar el registro?</h3>
+<div>
+    <h3>Detalles de Ventas</h3>
+    <hr />
+    <dl class=" row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.estatus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.estatus)
+        </dd>
+    </dl>
+    <form asp-action="Eliminar">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Aceptar" class="btn btn-danager" />
+        <a asp-action="Index">Regresar a Detalles de Ventas</a>
+    </form>
+</div>

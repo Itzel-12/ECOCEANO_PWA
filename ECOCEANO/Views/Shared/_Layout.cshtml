@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ECOCEANO</title>
+    <link rel="stylesheet" href="~/Assets/bootstrap/css/bootstrap.css" />
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+    <link rel="stylesheet" href="~/css/stylee.css" />
+    <link rel="stylesheet" href="~/css/Estilo2.css" />
+    <link rel="stylesheet" href="~/css/BarraNav.css" />
+    <link rel="stylesheet" href="~/css/Quienessomos.css" />
+    <link rel="stylesheet" href="~/css/Estilo.css" />
+
+
+    <script src="https://kit.fontawesome.com/439e33a9f6.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@500&display=swap" rel="stylesheet">
+    <!------ Include the above in your HEAD tag ---------->
+    <!-- Favicons -->
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- PWA-->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <!-- PWA-->
+</head>
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="navbar">
+            <div class="container-fluid">
+                <button style="margin-top: 20px;!important" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" style=""></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse" style="text-align: center; margin-top: 15px;">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0 menu3">
+                        <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Index">Inicio </a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Cart" asp-action="Index">Tienda </a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Creaturas">Criaturas Marinas</a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="QuienesSomos">¿Quienes Somos? </a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Descargas">Descargas</a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contacto">Contacto</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="Login" asp-action="Logout">
+
+                                    Cerrar Sesión
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="Home" asp-action="Login">
+                                    Iniciar Sesión
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="dropdown" style="margin-top: 20px;">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+                <i class="fas fa-shopping-cart" aria-hidden="true" style="font-size: 20px; margin-right: 2px; color: #52B0FF;"></i> <span class="badge badge-pill badge-info" style="color: #ff0000">@ViewBag.count</span>
+            </button>
+            <div class="dropdown-menu">
+                <div class="row total-header-section">
+                    <div class="col-lg-6 col-sm-6 col-6 ">
+                        <i class="fas fa-shopping-cart" aria-hidden="true" style="font-size: 20px; margin-right: 10px;color: #52B0FF;"></i>
+                        <span class="badge badge-pill badge-danger" style="color: #000000">@ViewBag.count</span>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
+                        <p>Total: <span class="text-info">@ViewBag.total</span></p>
+                    </div>
+                </div>
+                @if (ViewBag.cart != null)
+                {
+                    @foreach (var item in ViewBag.cart)
+                    {
+                        <div class="row cart-detail">
+                            <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+                                <img src="~/Img/@item.Producto.Imagen" />
+                            </div>
+                            <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+                                <p>@item.Producto.nombre</p>
+                                <span class="price text-info"> $ @item.Producto.Precio MXN</span> <span class="count"> Cantidad:@item.Quantity</span>
+
+                            </div>
+                        </div>
+                    }
+                }
+
+                else
+                {
+                    <small>Aun no hay productos en el carrito.</small>
+                }
+
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 text-center checkout">
+                        <a type="button" class="btn btn-info" asp-controller="Cart" asp-action="ShoppingCart">
+                            Ver todo
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- End Header -->
+    <i class="bi bi-list mobile-nav-toggle"></i>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <br />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--======================footer start======================-->
+    <footer class="webintern-footer">
+        <div class="webintern-footer-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 ">
+                        <a class="webintern-footer-logo" href="#">
+                            <img class="img-responsive" src="https://www.freelogodesign.org/img/logo-ex-4.png" style="width:100px;" alt="">
+                        </a>
+                        <div class="simple-text dark padding-sm">
+                            <p></p>
+                        </div>
+                        <div class="empty-space xs-25 sm-25"></div>
+                    </div>
+                    <div class="col-sm-6 col-md-2 footer-2">
+                        <!-- webintern_footer_title -->
+                        <h4 class="webintern_footer_title h5"><small>Conócenos</small></h4>
+                        <ul class="webintern-footer-list">
+                            <li><a href="#">¿Quienes somos?</a></li>
+                            <li><a href="#">Descargas</a></li>
+                            <li><a href="#">Contactos </a></li>
+                        </ul>
+                        <div class="empty-space xs-25 sm-25"></div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 footer-3">
+                        <!-- webintern_footer_title -->
+                        <h4 class="webintern_footer_title h5"><small>TECNO-IERF</small></h4>
+                        <ul class="webintern-footer-list">
+                            <li><a href="#">Tienda</a></li>
+                            <li><a href="#">Informe</a></li>
+                            <li><a href="#">Criaturas</a></li>
+                        </ul>
+                        <div class="empty-space xs-25"></div>
+                    </div>
+                    <div class="col-xs-12 col-md-4 col-sm-6">
+                        <div class="marg-sm-b30"></div>
+                        <!-- webintern_footer_title -->
+                        <h4 class="webintern_footer_title h5"><small>Consulta nuestras redes sociales</small></h4>
+                        <div class="empty-space marg-lg-b20"></div>
+                        <!--
+                        <div class="simple-text last dark ">
+                        <p>Get latest updates and offers.</p>
+                        </div>
+                        -->
+                        <div class="empty-space marg-lg-b15"></div>
+                        <!-- TT-SUBSCRIBE -->
+                        <form method="post">
+                            <div class="tt-subscribe">
+                                <input type="text" required="" placeholder="Enter your email">
+                                <div class="tt-subscribe-submit">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <input type="submit" value="">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="empty-space marg-lg-b30"></div>
+                        <!-- TT-SOCAIL -->
+                        <ul class="tt-socail">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tt-copy">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="tt-copy-left"> </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="tt-copy-right">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/Assets/bootstrap/js/bootstrap.js"></script>
+    @RenderSection("Scripts", required: false)
+    <script>'serviceWorker'in navigator&&navigator.serviceWorker.register('/serviceworker')</script>
+</body>
+</html>

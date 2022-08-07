@@ -1,0 +1,40 @@
+﻿@model DetallesVentas
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "DetallesVentas";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Catalogos" asp-action="Index">Catalogos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="DetalleVenta" asp-action="Index">Detalle de Ventas</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nueva</li>
+    </ol>
+</nav>
+
+<section id="nuevoDetalle">
+    <form method="post" asp-controller="DetalleVentas" asp-action="Add">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Cantidad" class=" control-label"></label>
+            <input asp-for="Cantidad" class="form-control" />
+            <span asp-validation-for="Cantidad" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductoID" class=" control-label"></label>
+            <select asp-for="ProductoID" asp-items="ViewBag.productoID" class=" form-control"></select>
+            <span asp-validation-for="ProductoID" class="text-danger"></span>
+        </div>
+
+        <div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -1,0 +1,29 @@
+﻿@page
+@model ECOCEANO.Models.Productos
+
+@{
+    ViewData["Title"] = "Details";
+}
+<h1>Detalle del producto</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <img src="~/Img/@Html.DisplayFor(model =>model.Imagen)" style="" />
+        </div>
+        <div class="col-md-5">
+            <h5>@Html.DisplayNameFor(model => model.nombre)</h5>
+            <p>@Html.DisplayFor(model => model.nombre)</p>
+
+            <h5>@Html.DisplayNameFor(model => model.descripcion)</h5>
+            <p>@Html.DisplayFor(model => model.descripcion)</p>
+
+            <h5>@Html.DisplayNameFor(model => model.Stock)</h5>
+            <p>@Html.DisplayFor(model => model.Stock)</p>
+
+            <h5>@Html.DisplayNameFor(model => model.Precio)</h5>
+            <p>$@Html.DisplayFor(model => model.Precio)MXN</p>
+
+            <a class="btn btn-sm btn-outline-secondary">Agregar al carrito</a>
+        </div>
+    </div>
+</div>

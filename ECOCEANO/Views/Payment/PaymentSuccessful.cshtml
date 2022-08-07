@@ -1,0 +1,61 @@
+﻿@page
+@model ECOCEANO.Views.Payment.PaymentSuccessfulModel
+@{
+}
+
+<div class="text-center">
+    <h1>MI COMPRA</h1>
+    <h2>¡PAGO REALIZADO CON ÉXITO!</h2>
+</div>
+
+<div class="background">
+    <div class="container">
+        <div class="panel pricing-table">
+
+            <div class="pricing-plan">
+                <img src="~/Img/Logo Empresa - TechnoVR.png" alt="" class="pricing-img">
+                <hr width=75% size="10" style="color: #808080;" />
+                <h3 class="pricing-header">DATOS DEL CLIENTE</h3>
+                <h5>Nombre: @ViewBag.cliente.first_name</h5>
+                <h5>Apellido: @ViewBag.cliente.last_name</h5>
+                <h5>Correo: @ViewBag.cliente.email</h5>
+
+                <hr size="10" style="color: #808080;" />
+
+                <br />
+                <h3 class="pricing-header">DIRECCIÓN</h3>
+                <h5>Dirección: @ViewBag.direccion.city</h5>
+                <h5>Ciudad: @ViewBag.direccion.country_code</h5>
+
+                <hr size="10" style="color: #808080;" />
+
+                <br />
+                <h3 class="pricing-header">DETALLE DE ORDEN</h3>
+                <h5>Total a pagar: @ViewBag.importe.total</h5>
+                <h5>Subtotal: @ViewBag.detalles.subtotal</h5>
+                <h5>Impuesto: @ViewBag.detalles.tax</h5>
+                <h5>Costo de envío: @ViewBag.detalles.shipping</h5>
+
+                <hr size="10" style="color: #808080;" />
+
+                <br />
+                <h3 class="pricing-header">DETALLE DEL PRODUCTO</h3>
+                @foreach (var item in ViewBag.articulos)
+                {
+                    <h5>Producto: @item.name</h5>
+                    <h5>Cantidad: @item.sku</h5>
+                    <h5>Precio: @item.price</h5>
+                }
+
+                <hr size="20" style="color: #0094ff;" />
+
+                <h3>¡GRACIAS POR TU COMPRA!</h3>
+                <a asp-controller="Cart" asp-action="Index" class="pricing-button">SEGUIR COMPRANDO</a>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+

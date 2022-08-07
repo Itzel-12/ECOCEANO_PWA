@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DetallesPedidos>
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "DetallesPedidos";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Catalogos" asp-action="Index">Catalogos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles de Pedidos</li>
+    </ol>
+</nav>
+<section id="nuevoDetalle" class="mb-2">
+    <a id="btnNuevo" class="btn btn-success" asp-controller="DetallePedido" asp-action="Registro">
+        <i class=" fa fa-file"></i> Nuevo
+    </a>
+</section>
+<!---Listar las editoriales existentes en la BD-->
+<section id="ListaDetallesPedido">
+    <table class="table table-striped table-borderless">
+        <thead class=" thead-light">
+            <tr>
+
+
+                <th scope="col">@Html.DisplayNameFor(model => model.Cantidad)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.MontoTotal)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.descripcion)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.producto)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.pedido)</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detallepedidos in Model)
+            {
+            <tr>
+                <th scope="row">@Html.DisplayFor(model => detallepedidos.Cantidad)</th>
+                <td>@Html.DisplayFor(model => detallepedidos.MontoTotal)</td>
+                <td>@Html.DisplayFor(model => detallepedidos.descripcion)</td>
+
+                <td>@Html.DisplayFor(model => detallepedidos.producto.nombre)</td>
+                <td>@Html.DisplayFor(model => detallepedidos.pedido.ID)</td>
+                <td>@Html.DisplayFor(model => detallepedidos.estatus)</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Editar" asp-route-id="@detallepedidos.ID">
+                        <i class="fas fa-edit"></i>Editar
+                    </a>
+                    <a class="btn btn-danger" asp-action="Borrar" asp-route-id="@detallepedidos.ID">
+                        <i class="fas fa-trash"></i>Eliminar
+                    </a>
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
